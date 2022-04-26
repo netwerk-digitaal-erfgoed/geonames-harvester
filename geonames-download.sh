@@ -31,7 +31,8 @@ rm admin1CodesASCII.txt
 
 cp config/headers-admin2-codes.txt admin2-codes.txt
 wget "https://download.geonames.org/export/dump/admin2Codes.txt"
+# remove double quotes that seem to appear within some strings
+# to prevent RML from crashing
 sed -i 's/"//g' admin2Codes.txt
-#sed -i 's/\'\'//g' admin2Codes.txt
 cat admin2Codes.txt >> admin2-codes.txt
 rm admin2Codes.txt
