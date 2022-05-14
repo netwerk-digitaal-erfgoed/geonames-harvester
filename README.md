@@ -6,17 +6,21 @@ Simple download and transform scripts to download and convert geonames dumps int
 
 ### RML
 
-The text to RDF transformation is done using the RML mapper. This requires a java runtime environment (openjdk or other). The RMLmapper can be downloaded from the the [RML repo](https://github.com/RMLio/rmlmapper-java). The scripts assumes that the `rmlmapper.jar` is available in the `./bin` directory.
+The text to RDF transformation is done using the RML mapper. This requires a java runtime environment (openjdk or other). The RMLmapper can be downloaded from the the [RML repo](https://github.com/RMLio/rmlmapper-java). The scripts assume that the `rmlmapper.jar` is available in the `./bin` directory.
 
 ### Fuseki
 
 The Geonames RDF is exposed through a Jena Fuseki based SPARQL endpoint. In this setup is choosen for the Fuseki docker server without UI. Download and extract the latest version of [the Jena Fuseki Docker](https://repo1.maven.org/maven2/org/apache/jena/jena-fuseki-docker/) zipfile and rename the new directory to `./fuseki`. Build the docker image using `docker-compose build --build-arg JENA_VERSION={latest version}`. Be sure to use a recent docker-compose version! Create an empty 'databases' and 'logs' dir before the first run. See the [Fuseki docs](https://jena.apache.org/documentation/fuseki2/fuseki-docker.html) for more information.
 
+Afther cloning and installing the additional tools, the subdirectories will look like this:
+
+![alt text](tree.png)
+
 ## Geonames download scripts
 
 A number of `bash` scripts take care of the download, mapping and exposing the generated RDF through a SPARQL endpoint.  
 
-These script also requires the `sed` en `awk` tools for preprocessing. They are avaible in standard Linux distro's.
+These script also requires the `sed` en `awk` tools for preprocessing. These are avaible in standard Linux distro's.
 
 See the [Geonames download website](https://download.geonames.org/export/dump/) for detailed information on the geonames dumpfiles. Currently only the **NL** and **BE** country dumpfiles are processed.
 
