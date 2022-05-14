@@ -22,6 +22,7 @@
       csvw:delimiter "\t";
       csvw:encoding "UTF-8";
       csvw:trim true;
+      csvw:null "";   # this doesn't seem to have any effect, sadly!
     ]
   ];
   rml:referenceFormulation ql:CSV .
