@@ -12,7 +12,7 @@ The text to RDF transformation is done using the RML mapper. This requires a jav
 
 The Geonames RDF is exposed through a Jena Fuseki based SPARQL endpoint. In this setup is choosen for the Fuseki docker server without UI. Download and extract the latest version of [the Jena Fuseki Docker](https://repo1.maven.org/maven2/org/apache/jena/jena-fuseki-docker/) zipfile and rename the new directory to `./fuseki`. Build the docker image using `docker-compose build --build-arg JENA_VERSION={latest version}`. Be sure to use a recent docker-compose version! Create an empty 'databases' and 'logs' dir before the first run. See the [Fuseki docs](https://jena.apache.org/documentation/fuseki2/fuseki-docker.html) for more information.
 
-Afther cloning and installing the additional tools, the subdirectories will look like this:
+Afther cloning the repo and installing the additional tools described above, the subdirectories will look like this:
 
 ![alt text](tree.png)
 
