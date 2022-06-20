@@ -2,8 +2,8 @@ name: Build app and update Docker image
 
 on:
   push:
-#    branches:
-#      - main
+    branches:
+      - main
 
 jobs:
   build:
@@ -50,6 +50,3 @@ jobs:
       - name: Update deployment
         run: |
           kubectl set image deployment/geonames-sparql harvester=${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.sha_short }} --record
-
-      - name: Verify deployment
-        run: kubectl rollout status deployment/geonames-sparql
