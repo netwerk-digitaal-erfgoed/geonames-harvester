@@ -43,7 +43,6 @@ jobs:
       - name: Store DigitalOcean credentials
         run: doctl kubernetes cluster kubeconfig save nde
 
-      # See https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment
       - name: Update deployment
         run: |
-          kubectl set image deployment/geonames-sparql harvester=${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.sha_short }} --record
+          kubectl set image statefulset/geonames-sparql harvester=${{ steps.vars.outputs.docker_image }}:${{ steps.vars.outputs.sha_short }} --record
