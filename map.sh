@@ -2,7 +2,7 @@
 DATA_DIR="$PWD/data"
 BIN_DIR="$PWD/bin"
 CONFIG_DIR="$PWD/config"
-OUTPUT_DIR="$DATA_DIR"
+OUTPUT_DIR="$PWD/fuseki/databases"
 cd $DATA_DIR
 echo "Running the RMLmapper to convert geonames data to RDF, be patient..."
 java -jar $BIN_DIR/rmlmapper.jar -m $CONFIG_DIR/geonames.rml -o $OUTPUT_DIR/geonames.nt
