@@ -6,7 +6,7 @@ if [ ! -d "$DATA_DIR" ]; then
 fi
 
 # specify countries to download
-country_files="NL BE DE"
+country_files="NL BE"
 cp $CONFIG_DIR/headers-gn.txt $DATA_DIR/geonames.txt
 for cfile in $country_files; do
     mkdir temp
