@@ -1,7 +1,6 @@
 @prefix rml: <http://semweb.mmlab.be/ns/rml#>.
 @prefix rr: <http://www.w3.org/ns/r2rml#>.
 @prefix ql: <http://semweb.mmlab.be/ns/ql#>.
-@prefix csvw: <http://www.w3.org/ns/csvw#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix : <http://example.org/rules/>.
@@ -12,26 +11,16 @@
 @prefix grel: <http://users.ugent.be/~bjdmeest/function/grel.ttl#> .
 @prefix idlab-fn: <http://example.com/idlab/function/> .
 
-:GeonamesSource 
+:GeonamesSource
   a rml:LogicalSource ;
-  rml:source [
-    rdf:type csvw:Table;
-    csvw:url "geonamesplus.txt";
-    csvw:dialect [
-      rdf:type csvw:Dialect;
-      csvw:delimiter "\t";
-      csvw:encoding "UTF-8";
-      csvw:trim true;
-      csvw:null "";   # this doesn't seem to have any effect, sadly!
-    ]
-  ];
+  rml:source "geonamesplus.txt";
   rml:referenceFormulation ql:CSV .
 
-:GeonamesMap 
+:GeonamesMap
   a rr:TriplesMap;
   rml:logicalSource :GeonamesSource ;
   rr:subjectMap [ rr:template "https://sws.geonames.org/{geonameid}/" ];
-  rr:predicateObjectMap 
+  rr:predicateObjectMap
     [
       rr:predicate gn:name;
       rr:objectMap [ rml:reference "name" ]
@@ -46,13 +35,13 @@
     ],
     [
       rr:predicate gn:featureClass;
-      rr:objectMap [ 
+      rr:objectMap [
          rr:template "https://www.geonames.org/ontology#{feature class}"
       ]
     ],
     [
       rr:predicate gn:featureCode;
-      rr:objectMap [ 
+      rr:objectMap [
          rr:template "https://www.geonames.org/ontology#{feature class}.{feature code}"
       ]
     ],
@@ -92,10 +81,11 @@
 
 
 :AlternateNamesSplit
+  rr:termType rr:Literal;
   fnml:functionValue [
     rml:logicalSource :LogicalSource;
     rr:predicateObjectMap [
-      rr:predicate fno:executes; 
+      rr:predicate fno:executes;
       rr:objectMap [ rr:constant grel:string_split ];
     ];
     rr:predicateObjectMap [
@@ -108,64 +98,36 @@
       ];
     ].
 
-:Admin1codeSource 
+:Admin1codeSource
   a rml:LogicalSource ;
-  rml:source [
-    rdf:type csvw:Table;
-    csvw:url "admin1-codes.txt";
-    csvw:dialect [
-      rdf:type csvw:Dialect;
-      csvw:delimiter "\t";
-      csvw:encoding "UTF-8";
-      csvw:trim true;
-    ];
-  ];
+  rml:source "admin1-codes.txt";
   rml:referenceFormulation ql:CSV .
 
-
-:Adm1Map  
+:Adm1Map
   a rr:TriplesMap;
   rml:logicalSource :Admin1codeSource ;
   rr:subjectMap [ rr:template "https://sws.geonames.org/{geonameId}/" ].
 
-:Admin2codeSource 
+:Admin2codeSource
   a rml:LogicalSource ;
-  rml:source [
-    rdf:type csvw:Table;
-    csvw:url "admin2-codes.txt";
-    csvw:dialect [
-      rdf:type csvw:Dialect;
-      csvw:delimiter "\t";
-      csvw:encoding "UTF-8";
-      csvw:trim true;
-    ];
-  ];
+  rml:source "admin2-codes.txt";
   rml:referenceFormulation ql:CSV .
 
-:Adm2Map  
+:Adm2Map
   a rr:TriplesMap;
   rml:logicalSource :Admin2codeSource ;
   rr:subjectMap [ rr:template "https://sws.geonames.org/{geonameId}/" ].
 
-  :FeatureCodeSource 
+:FeatureCodeSource
   a rml:LogicalSource ;
-  rml:source [
-    rdf:type csvw:Table;
-    csvw:url "feature-codes.txt";
-    csvw:dialect [
-      rdf:type csvw:Dialect;
-      csvw:delimiter "\t";
-      csvw:encoding "UTF-8";
-      csvw:trim true;
-    ]
-  ];
+  rml:source "feature-codes.txt";
   rml:referenceFormulation ql:CSV .
 
-:FeatureCodeTriplesMap 
+:FeatureCodeTriplesMap
   a rr:TriplesMap;
   rml:logicalSource :FeatureCodeSource ;
   rr:subjectMap [ rr:template "https://www.geonames.org/ontology#{featureCode}" ];
-  rr:predicateObjectMap 
+  rr:predicateObjectMap
   [
     rr:predicate gn:name;
     rr:objectMap [ rml:reference "name" ]

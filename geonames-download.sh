@@ -1,12 +1,11 @@
 #!/bin/bash
 CONFIG_DIR="$PWD/config"
 DATA_DIR="./data"
-if [ ! -d "$DATA_DIR" ]; then
-    mkdir $DATA_DIR
-fi
+mkdir -p $DATA_DIR
 
 # specify countries to download
-country_files="NL BE DE"
+#country_files="NL BE DE "
+country_files="allCountries"
 cp $CONFIG_DIR/headers-gn.txt $DATA_DIR/geonames.txt
 for cfile in $country_files; do
     mkdir temp
@@ -25,19 +24,10 @@ rm $DATA_DIR/geonames.txt
 
 # download latest version of generic files
 cp $CONFIG_DIR/headers-feature-codes.txt $DATA_DIR/feature-codes.txt
-curl -O "https://download.geonames.org/export/dump/featureCodes_en.txt"
-cat featureCodes_en.txt >> $DATA_DIR/feature-codes.txt
-rm featureCodes_en.txt
+curl "https://download.geonames.org/export/dump/featureCodes_en.txt" >> $DATA_DIR/feature-codes.txt
 
 cp $CONFIG_DIR/headers-admin1-codes.txt $DATA_DIR/admin1-codes.txt
-curl -O "https://download.geonames.org/export/dump/admin1CodesASCII.txt"
-cat admin1CodesASCII.txt >> $DATA_DIR/admin1-codes.txt
-rm admin1CodesASCII.txt
+curl "https://download.geonames.org/export/dump/admin1CodesASCII.txt" >> $DATA_DIR/admin1-codes.txt
 
 cp $CONFIG_DIR/headers-admin2-codes.txt $DATA_DIR/admin2-codes.txt
-curl -O "https://download.geonames.org/export/dump/admin2Codes.txt"
-# remove double quotes that seem to appear within some strings
-# to prevent RML from crashing
-sed -i 's/"//g' admin2Codes.txt
-cat admin2Codes.txt >> $DATA_DIR/admin2-codes.txt
-rm admin2Codes.txt
+curl "https://download.geonames.org/export/dump/admin2Codes.txt" >> $DATA_DIR/admin2-codes.txt
