@@ -8,9 +8,9 @@ mkdir -p $DATA_DIR
 #country_files="NL BE DE "
 country_files="allCountries"
 rm -rf $DATA_DIR/geonames.csv temp
-mkdir temp
-cd temp
 for cfile in $country_files; do
+    mkdir temp
+    cd temp
     printf "\nDownloading $cfile... "
     curl -sSO "https://download.geonames.org/export/dump/$cfile.zip"
     unzip "$cfile.zip"
