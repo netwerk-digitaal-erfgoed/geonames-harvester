@@ -1,9 +1,6 @@
 name: Transform GeoNames data to RDF
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     - cron: '0 3 * * 0' # Every Sunday at 03:00 UTC
   workflow_dispatch:
