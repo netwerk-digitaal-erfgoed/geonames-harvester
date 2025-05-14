@@ -7,7 +7,7 @@ CONFIG_DIR="$PWD/config"
 
 # Download SPARQL Anything CLI.
 if [ ! -f "$BIN_DIR/$SPARQL_ANYTHING_JAR" ]; then
-    curl -L "https://github.com/SPARQL-Anything/sparql.anything/releases/download/$SPARQL_ANYTHING_VERSION/$SPARQL_ANYTHING_JAR" -o $BIN_DIR/$SPARQL_ANYTHING_JAR
+    curl -sSL "https://github.com/SPARQL-Anything/sparql.anything/releases/download/$SPARQL_ANYTHING_VERSION/$SPARQL_ANYTHING_JAR" -o $BIN_DIR/$SPARQL_ANYTHING_JAR
 fi
 
 # Map admin codes.

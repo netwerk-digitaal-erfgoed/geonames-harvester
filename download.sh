@@ -8,10 +8,11 @@ mkdir -p $DATA_DIR
 #country_files="NL BE DE "
 country_files="allCountries"
 rm -rf $DATA_DIR/geonames.csv temp
+mkdir temp
+cd temp
 for cfile in $country_files; do
-    mkdir temp
-    cd temp
-    curl -O "https://download.geonames.org/export/dump/$cfile.zip"
+    printf "\nDownloading $cfile... "
+    curl -sSO "https://download.geonames.org/export/dump/$cfile.zip"
     unzip "$cfile.zip"
     cat "$cfile.txt" >> $DATA_DIR/geonames.csv
     rm -rf temp
@@ -40,7 +41,7 @@ done
 
 printf "\nDownload supporting files... "
 cp $CONFIG_DIR/headers-admin1-codes.csv $DATA_DIR/admin1-codes.csv
-curl "https://download.geonames.org/export/dump/admin1CodesASCII.txt" >> $DATA_DIR/admin1-codes.csv
+curl -sS "https://download.geonames.org/export/dump/admin1CodesASCII.txt" >> $DATA_DIR/admin1-codes.csv
 
 cp $CONFIG_DIR/headers-admin2-codes.csv $DATA_DIR/admin2-codes.csv
-curl "https://download.geonames.org/export/dump/admin2Codes.txt" >> $DATA_DIR/admin2-codes.csv
+curl -sS "https://download.geonames.org/export/dump/admin2Codes.txt" >> $DATA_DIR/admin2-codes.csv
