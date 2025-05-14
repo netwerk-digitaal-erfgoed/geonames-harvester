@@ -1,14 +1,41 @@
-# Geonames-harvest
+# GeoNames RDF
 
-Simple download and transform scripts to download and convert geonames dumps into a basic RDF dataset. The result is loaded in a SPARQL endpoint for querying the data through the Network-of-Terms.
+This repository contains shell scripts that download [GeoNames data dumps](https://download.geonames.org/export/dump/)
+and convert them to RDF using [SPARQL Anything](https://github.com/SPARQL-Anything/sparql.anything),
+resulting in a `geonames.ttl` file that you can load into a SPARQL server.
 
-## Installation
+## Running
 
-### RML
+You can run the transform process in a Docker container or directly on your host machine.
 
-The text to RDF transformation is done using [SPARQL Anything](https://github.com/SPARQL-Anything/sparql.anything).
-This requires a Java runtime environment.
-You can download the SPARQL Anything JAR [here](https://github.com/SPARQL-Anything/sparql.anything/releases).
+### In Docker
+
+To run the transform process in a Docker container, run:
+
+```shell
+docker run --pull -v $(pwd)/data:/app/data --rm -it ghcr.io/netwerk-digitaal-erfgoed/geonames-rdf
+```
+
+### Directly
+
+To run the scripts directly, run:
+
+```shell
+./download.sh
+```
+
+Then start the mapping process with:
+
+```shell
+./map.sh
+```
+
+This will download SPARQL Anything if not already available.
+
+## Output
+
+After running the transform process, you’ll find a `data/geonames.ttl` file 
+that you can load into a SPARQL server. 
 
 ### Fuseki
 
@@ -17,22 +44,3 @@ The Geonames RDF is exposed through a Jena Fuseki based SPARQL endpoint. In this
 Afther cloning the repo and installing the additional tools described above, the subdirectories will look like this:
 
 ![alt text](tree.png)
-
-## Geonames download scripts
-
-A number of `bash` scripts take care of the download, mapping and exposing the generated RDF through a SPARQL endpoint.  
-
-These script also requires the `sed` en `awk` tools for preprocessing. These are avaible in standard Linux distro's.
-
-See the [Geonames download website](https://download.geonames.org/export/dump/) for detailed information on the geonames dumpfiles.
-
-Run the scripts in the following order:
-
-1. **Download**
-Run the `download.sh` to download the data. After downloading some basic cleanup is done to prevent problems in the mapping proces. The download files are placed in the `./data` directory.
-
-2. **Mapping**
-   Run the `map.sh` to convert the text files to RDF. This produces a `data/geonames.ttl` file. 
-
-3. **Expose the data**
-   Run the `server.sh` to start the server and expose the SPARQL-endpoint on <http://localhost:3030/geonames/sparql>.
