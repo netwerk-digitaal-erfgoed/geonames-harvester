@@ -13,7 +13,7 @@ You can run the transform process in a Docker container or directly on your host
 To run the transform process in a Docker container, run:
 
 ```shell
-docker run --pull -v $(pwd)/data:/app/data --rm -it ghcr.io/netwerk-digitaal-erfgoed/geonames-rdf
+docker run -v $(pwd)/output:/output --rm ghcr.io/netwerk-digitaal-erfgoed/geonames-rdf
 ```
 
 ### Directly
@@ -34,7 +34,7 @@ This will download SPARQL Anything if not already available.
 
 ## Output
 
-After running the transform process, you’ll find a `data/geonames.ttl` file 
+After running the transform process, you’ll find a `output/geonames.ttl` file 
 that you can load into a SPARQL server. 
 
 ### Fuseki

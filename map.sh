@@ -4,6 +4,7 @@ BIN_DIR="$PWD/bin"
 CONFIG_DIR="$PWD/config"
 : "${SPARQL_ANYTHING_VERSION:=v1.0-DEV.15}"
 : "${SPARQL_ANYTHING_JAR:=sparql-anything-$SPARQL_ANYTHING_VERSION.jar}"
+: "${OUTPUT_DIR:=$(PWD)/output}"
 
 # Download SPARQL Anything CLI.
 if [ ! -f "$BIN_DIR/$SPARQL_ANYTHING_JAR" ]; then
@@ -20,4 +21,4 @@ for f in $DATA_DIR/geonames_*.csv; do
     java -jar $BIN_DIR/$SPARQL_ANYTHING_JAR --query "$(sed "s|{SOURCE}|$f|" $CONFIG_DIR/places.rq)" --load $DATA_DIR/admin-codes.ttl --output $f.ttl
 done
 
-cat $DATA_DIR/*.csv.ttl > $DATA_DIR/geonames.ttl
+cat $DATA_DIR/*.csv.ttl > $OUTPUT_DIR/geonames.ttl
