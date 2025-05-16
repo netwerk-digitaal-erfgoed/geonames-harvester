@@ -1,7 +1,7 @@
 #!/bin/sh
 CONFIG_DIR="$PWD/config"
 DATA_DIR="$PWD/data"
-CHUNK_SIZE=1000000
+: "${CHUNK_SIZE:=1000000}"
 mkdir -p $DATA_DIR
 
 # specify countries to download
