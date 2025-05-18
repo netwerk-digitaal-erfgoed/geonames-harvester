@@ -6,6 +6,8 @@ CONFIG_DIR="$PWD/config"
 : "${SPARQL_ANYTHING_JAR:=sparql-anything-$SPARQL_ANYTHING_VERSION.jar}"
 : "${OUTPUT_DIR:=$(PWD)/output}"
 
+mkdir -p $OUTPUT_DIR
+
 # Download SPARQL Anything CLI.
 if [ ! -f "$BIN_DIR/$SPARQL_ANYTHING_JAR" ]; then
     curl -sSL "https://github.com/SPARQL-Anything/sparql.anything/releases/download/$SPARQL_ANYTHING_VERSION/$SPARQL_ANYTHING_JAR" -o $BIN_DIR/$SPARQL_ANYTHING_JAR
