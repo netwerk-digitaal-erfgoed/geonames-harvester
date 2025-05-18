@@ -4,7 +4,7 @@ BIN_DIR="$PWD/bin"
 CONFIG_DIR="$PWD/config"
 : "${SPARQL_ANYTHING_VERSION:=v1.0-DEV.15}"
 : "${SPARQL_ANYTHING_JAR:=sparql-anything-$SPARQL_ANYTHING_VERSION.jar}"
-: "${OUTPUT_DIR:=$(PWD)/output}"
+: "${OUTPUT_DIR:=$PWD/output}"
 
 mkdir -p $OUTPUT_DIR
 
