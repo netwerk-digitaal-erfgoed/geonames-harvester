@@ -20,7 +20,9 @@ jobs:
         with:
           name: geonames-ttl
           path: output/geonames.ttl
-      - run: zip -r output/geonames.zip output/geonames.ttl
+      - run: |
+          cd output
+          zip -r geonames.zip geonames.ttl
       - uses: BetaHuhn/do-spaces-action@v2
         with:
           access_key: ${{ secrets.S3_ACCESS_KEY}}
