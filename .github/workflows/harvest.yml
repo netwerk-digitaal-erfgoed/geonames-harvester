@@ -25,6 +25,6 @@ jobs:
           access_key: ${{ secrets.S3_ACCESS_KEY}}
           secret_key: ${{ secrets.S3_SECRET_KEY }}
           space_name: geonames
-          space_region: am3
+          space_region: ams3
           source: output/geonames.ttl
 
