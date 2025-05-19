@@ -4,6 +4,8 @@ This repository contains shell scripts that download [GeoNames data dumps](https
 and convert them to RDF using [SPARQL Anything](https://github.com/SPARQL-Anything/sparql.anything),
 resulting in a `geonames.ttl` file that you can load into a SPARQL server.
 
+You can download a periodically updated RDF file from http://geonames.ams3.digitaloceanspaces.com/geonames.zip (420 MB).
+
 ## Running
 
 You can run the transform process in a Docker container or directly on your host machine.
